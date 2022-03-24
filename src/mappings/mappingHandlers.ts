@@ -7,7 +7,9 @@ type EventArgs = [string, BigNumber, BigNumber] & { user: string; amount: BigNum
 
 async function saveTransaction(event: MoonbeamEvent<EventArgs>, type: string): Promise<void> {
     let transaction = new Transaction(event.transactionHash);
-    transaction.date = new Date(event.blockTimestamp)
+    transaction.date = new Date(event.blockTimestamp);
+    transaction.timestamp = BigInt(event.blockTimestamp.getTime());
+    transaction.blockNumber = BigInt(event.blockNumber);
     transaction.wallet = event.args.user;
     transaction.action = type;
     transaction.amount = event.args.amount.toBigInt();

@@ -1,6 +1,8 @@
 type Transaction @entity {
   id: ID!
   date: Date!
+  timestamp: BigInt!
+  blockNumber: BigInt!
   wallet: String!
   action: String!
   amount: BigInt!
